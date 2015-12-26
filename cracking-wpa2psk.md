@@ -3,13 +3,18 @@
 ## Introduction
 In this tutorial, we'll be looking at how to crack WPA/WPA2 networks with Pre-Shared Keys (PSK) using aircrack-ng on Kali Linux. WPA and WPA2 (Wifi Protected Access/2) are security protocols used to secure wireless computer networks. For more information about WEP, WPA, WPA2, and their vulnerabilities, check out the following document[pdf](http://www.hsc.fr/ressources/articles/hakin9_wifi/hakin9_wifi_EN.pdf).
 
+<!-- Like you mentioned in the github  message, screenshots are indeed needed, but since they would most probably need the OS, can you make a short tutorial of how to live boot one up (like what we did at the workshop) or use a VM.
+
+Example:- for VM: show where to download the Virtual Box (which edition if it makes a difference) & how to run it..
+-->
+
 ## What You'll Need
 - Wireless interface compatible with aircrack-ng. (Instructions: [link)](http://aircrack-ng.org/doku.php?id=compatible_cards)
 - Live Kali Linux USB (Instructions: [link)](http://docs.kali.org/pdf/articles/kali-linux-live-usb-install-en.pdf)
 - A test network (on my router, I had more success on the 2.4GHz band than 5GHz)
 
 ## Overview
-The attack is made possible because of how WPA2 implements it's authentication handshake. One step in particular, the "four-way handshake", provides an opportunity for others to attempt to crack the pas sphrase. Because of this, we'll need to see this authentication handshake and also need to determine the following information:
+The attack is made possible because of how WPA2 implements it's authentication handshake. One step in particular, the "four-way handshake", provides an opportunity for others to attempt to crack the pass phrase. Because of this, we'll need to see this authentication handshake and also need to determine the following information:
 
 - Client MAC address (MAC of machine authenticating to network)
 - BSSID: Access Point (AP) MAC address
