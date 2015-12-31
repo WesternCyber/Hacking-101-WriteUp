@@ -48,7 +48,7 @@ This starts our wireless interface (wlp3s0) in monitor mode on channel 11. We ca
 
 
 ### Step 3 - Capture a handshake
-As previously mentioned, we need to capture the four-way handshake in order to attempt to crack the password. We'll do this with airodump-ng which will require the information we acquired in the previous steps. The command is as follows:
+As previously mentioned, we need to capture the four-way handshake in order to attempt to crack the passphrase. We'll do this with airodump-ng which will require the information we acquired in the previous steps. The command is as follows:
 
 `airodump-ng --channel 11 --bssid 44:E9:DD:49:A2:EA --write handshake wlp3s0mon`
 
@@ -73,17 +73,21 @@ After successfully capturing a handshake, we'll notice a change in top-right cor
 Now we have all the information we need to begin our attempts at cracking this passphrase.
 
 ### Step 4 - Cracking the passphrase
-To crack the passphrase, we'll need a list of candidate passwords known as a dictionary or word list. Kali Linux has some word lists by default located in `/usr/share/wordlists` but these come from different sources and each list may be best formatted for specific tasks. For more information on finding or generating word lists, have a look at [this page.](http://www.aircrack-ng.org/doku.php?id=faq&DokuWiki=sn0m2t79i3a49a61b481m4lmq4#where_can_i_find_good_wordlists)
+
+#### Dictionary attack
+To crack the passphrase, we'll need a list of candidate passphrases known as a dictionary or word list. Kali Linux has some word lists by default located in `/usr/share/wordlists` but these come from different sources and each list may be best formatted for specific tasks. For more information on finding or generating word lists, have a look at [this page.](http://www.aircrack-ng.org/doku.php?id=faq&DokuWiki=sn0m2t79i3a49a61b481m4lmq4#where_can_i_find_good_wordlists)
 
 After choosing a wordlist, we can begin attempting to crack the passphrase. In a new terminal window, enter the following command:
 
 `aircrack-ng -w word.list handshake.cap`
 
-And we wait.. depending on the word list and passphrase, this can take a while. If the passphrase isn't in the word list, we'll generally be presented with the following output:
+And we wait.. depending on the word list and passphrase, this can take a while. If we're successful, this is what we'll see:
 
-<!-- passphrase fail -->
+![Passphrase Cracked](img/aircrack-success.png "Successfully cracked the passphrase.")
 
-If this is the case, we'll need to find better word lists and try again until we're successful. It's worth nothing that this may not be feasible depending on the length of the passphrase or quality of word lists. However, if we do succeed, this is what the output should look like:
+If not, it means that the AP's passphrase wasn't in our wordlist and we'll need to either find a different word using the techniques discussed in the previous link.
 
-<!-- success -->
+#####Sources:
+[Aircrack-ng: "Tutorial: How to crack WPA/WPA2"](http://www.aircrack-ng.org/doku.php?id=cracking_wpa)
+[Breaking WPA2-PSK with Kali Linux](http://www.drchaos.com/breaking-wpa2-psk-with-kali/)
 
